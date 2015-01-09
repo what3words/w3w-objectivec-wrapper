@@ -21,19 +21,19 @@ What3Words *w3w = [[What3Words alloc] initWithWithApiKey:@"YOUR_API_KEY"];
 ```
 
 ### Get the available languages
-This method takes an What3WordsCompletion completion block:
+This method takes an What3WordsCompletion completion block:  
 <b>- (void)getLanguagesWithCompletion:(What3WordsCompletion)completion;</b>
 
 Usage:
 ```
 [w3w getLanguagesWithCompletion:^(NSDictionary *result, NSError *error) {
     NSLog(@"languages: %@", result);
-  }];
+}];
 ```
 
 
-### Convert words to position
-<b>- (void)wordsToPosition:(id)words withCompletion:(What3WordsCompletion)completion;</b>
+### Convert words to position  
+<b>- (void)wordsToPosition:(id)words withCompletion:(What3WordsCompletion)completion;</b>  
 words argument can be one of the following:
 - an NSString ex: @"table.lamp.chair"
 - an NSArray ex: @[ @"table", @"lamp", @"chair" ]
@@ -41,13 +41,13 @@ words argument can be one of the following:
 Usage:
 ```
 [w3w wordsToPosition:@[ @"table", @"chair", @"lamp" ]
-        withCompletion:^(NSDictionary *result, NSError *error) {
-          NSLog(@"aici: %@", result);
-        }];
+      withCompletion:^(NSDictionary *result, NSError *error) {
+    NSLog(@"aici: %@", result);
+}];
 ```
 
-### Convert position into 3 words
-<b>- (void)positionToWords:(id)position withCompletion:(What3WordsCompletion)completion;</b>
+### Convert position into 3 words  
+<b>- (void)positionToWords:(id)position withCompletion:(What3WordsCompletion)completion;</b>  
 position argument can be one of the following:
 - an NSString ex: @"43.23,23.20"
 - an NSArray ex: @[ @(43.23), @(23.20) ]
@@ -55,7 +55,7 @@ position argument can be one of the following:
 Usage:
 ```
 [w3w positionToWords:@"43.23,23.20"
-        withCompletion:^(NSDictionary *result, NSError *error) {
-          NSLog(@"aici: %@", result);
-        }];
+      withCompletion:^(NSDictionary *result, NSError *error) {
+    NSLog(@"aici: %@", result);
+}];
 ```
