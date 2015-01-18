@@ -17,7 +17,7 @@ Copy the What3Words.h and What3Words.m files into your Xcode project
 
 You will need to initialize an What3Words object with your api key:
 ```
-What3Words *w3w = [[What3Words alloc] initWithWithApiKey:@"YOUR_API_KEY"];
+What3Words *w3w = [[What3Words alloc] initWithWithApiKey:@"YOURAPIKEY"];
 ```
 
 ### Get the available languages
