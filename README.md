@@ -8,21 +8,21 @@ Use the what3words API in your application (see http://developer.what3words.com/
 This will require AFNetworking included, if you aren't already using it:
 https://github.com/AFNetworking/AFNetworking
 
-Copy the What3Words.h and What3Words.m files into your Xcode project
+Copy the what3words.h and what3words.m files into your Xcode project
 
 
 ## Usage
 
-### What3Words object
+### what3words object
 
-You will need to initialize an What3Words object with your api key:
+You will need to initialize an what3words object with your api key:
 ```
-What3Words *w3w = [[What3Words alloc] initWithWithApiKey:@"YOURAPIKEY"];
+what3words *w3w = [[what3words alloc] initWithWithApiKey:@"YOURAPIKEY"];
 ```
 
 ### Get the available languages
-This method takes an What3WordsCompletion completion block:  
-<b>- (void)getLanguagesWithCompletion:(What3WordsCompletion)completion;</b>
+This method takes an what3wordsCompletion completion block:  
+<b>- (void)getLanguagesWithCompletion:(what3wordsCompletion)completion;</b>
 
 Usage:
 ```
@@ -33,7 +33,7 @@ Usage:
 
 
 ### Convert words to position  
-<b>- (void)wordsToPosition:(id)words withCompletion:(What3WordsCompletion)completion;</b>  
+<b>- (void)wordsToPosition:(id)words withCompletion:(what3wordsCompletion)completion;</b>  
 words argument can be one of the following:
 - an NSString ex: @"table.lamp.chair"
 - an NSArray ex: @[ @"table", @"lamp", @"chair" ]
@@ -47,7 +47,7 @@ Usage:
 ```
 
 ### Convert position into 3 words  
-<b>- (void)positionToWords:(id)position withCompletion:(What3WordsCompletion)completion;</b>  
+<b>- (void)positionToWords:(id)position withCompletion:(what3wordsCompletion)completion;</b>  
 position argument can be one of the following:
 - an NSString ex: @"43.23,23.20"
 - an NSArray ex: @[ @(43.23), @(23.20) ]

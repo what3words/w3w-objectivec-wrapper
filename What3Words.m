@@ -1,20 +1,20 @@
 //
-//  What3Words.m
-//  W3wWrapper
+//  what3words.m
+//  w3wWrapper
 //
-//  Created by What3Words on 08/01/15.
-//  Copyright (c) 2015 What3Words. All rights reserved.
+//  Created by what3words on 08/01/15.
+//  Copyright (c) 2015 what3words. All rights reserved.
 //
 
-#import "What3Words.h"
+#import "what3words.h"
 #import <AFNetworking/AFNetworking.h>
 
-NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
+NSString *const kwhat3wordsApiUrl = @"http://api.what3words.com/";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface What3Words()
+@interface what3words()
 
 @property (nonatomic, strong) NSString *apiKey;
 
@@ -24,7 +24,7 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation What3Words
+@implementation what3words
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,15 +40,15 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)getLanguagesWithCompletion:(What3WordsCompletion)completion
+- (void)getLanguagesWithCompletion:(what3wordsCompletion)completion
 {
-  NSString *url = [kWhat3WordsApiUrl stringByAppendingString:@"get-languages"];
+  NSString *url = [kwhat3wordsApiUrl stringByAppendingString:@"get-languages"];
   [self postRequestToUrl:url params:nil completion:completion];
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)wordsToPosition:(id)words withCompletion:(What3WordsCompletion)completion
+- (void)wordsToPosition:(id)words withCompletion:(what3wordsCompletion)completion
 {
   if (!([words isKindOfClass:[NSArray class]] || [words isKindOfClass:[NSString class]])) {
     NSLog(@"You need to provide either an NSArray or NSString");
@@ -64,7 +64,7 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
     wordsString = [array componentsJoinedByString:@"."];
   }
   
-  NSString *url = [kWhat3WordsApiUrl stringByAppendingString:@"w3w"];
+  NSString *url = [kwhat3wordsApiUrl stringByAppendingString:@"w3w"];
   [self postRequestToUrl:url
                   params:@{ @"string" : wordsString }
               completion:completion];
@@ -72,7 +72,7 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)positionToWords:(id)position withCompletion:(What3WordsCompletion)completion
+- (void)positionToWords:(id)position withCompletion:(what3wordsCompletion)completion
 {
   if (!([position isKindOfClass:[NSArray class]] || [position isKindOfClass:[NSString class]])) {
     NSLog(@"You need to provide either an NSArray or NSString");
@@ -88,7 +88,7 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
     positionString = [array componentsJoinedByString:@","];
   }
   
-  NSString *url = [kWhat3WordsApiUrl stringByAppendingString:@"position"];
+  NSString *url = [kwhat3wordsApiUrl stringByAppendingString:@"position"];
   [self postRequestToUrl:url
                   params:@{ @"position" : positionString }
               completion:completion];
@@ -98,7 +98,7 @@ NSString *const kWhat3WordsApiUrl = @"http://api.what3words.com/";
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)postRequestToUrl:(NSString *)url
                   params:(NSDictionary *)params
-              completion:(What3WordsCompletion)completion
+              completion:(what3wordsCompletion)completion
 {
   if (!_apiKey) {
     if (completion) {
