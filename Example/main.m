@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "W3wGeocoder.h"
+#import "../Sources/W3wGeocoder.h"
 #import <CoreLocation/CoreLocation.h>
 
 
