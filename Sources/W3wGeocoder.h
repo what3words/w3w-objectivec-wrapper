@@ -88,6 +88,7 @@ enum InputType { VOCONHYBRID, NMDPASR };
 @interface W3wGeocoder : NSObject {
   NSString *apiUrl;
   NSString *apiKey;
+  NSString *versionHeader;
 }
 
 -(id)initWithApiKey:(NSString *)key;
@@ -112,6 +113,8 @@ enum InputType { VOCONHYBRID, NMDPASR };
 +(NSString *)stringForInputType:(enum InputType)input_type;
 
 -(void)performRequest:(NSString *)path params:(NSDictionary *)params completion:(void (^)(NSDictionary *result, W3wError *error))completion;
+
+-(void)figureOutVersions;
 @end
 
 

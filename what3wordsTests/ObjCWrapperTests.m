@@ -115,11 +115,16 @@
       {
       XCTAssertNil(error);
 
-      W3wSuggestion *first_match = suggestions[0];
+      XCTAssertGreaterThan([suggestions count], 0);
+      
+      if ([suggestions count] > 0)
+        {
+        W3wSuggestion *first_match = suggestions[0];
 
-      // handle the response
-      XCTAssertTrue(suggestions.count == 5);
-      XCTAssertTrue([first_match.words isEqualToString:@"rischiare.piante.carciofi"]);
+        // handle the response
+        XCTAssertTrue(suggestions.count == 5);
+        XCTAssertTrue([first_match.words isEqualToString:@"rischiare.piante.carciofi"]);
+        }
 
       [expectation fulfill];
       }];
@@ -136,11 +141,16 @@
       {
       XCTAssertNil(error);
 
-      W3wSuggestion *first_match = suggestions[0];
+      XCTAssertGreaterThan([suggestions count], 0);
+      
+      if ([suggestions count] > 0)
+        {
+        // handle the response
+        W3wSuggestion *first_match = suggestions[0];
 
-      // handle the response
-      XCTAssertTrue(suggestions.count == 3);
-      XCTAssertTrue([first_match.words isEqualToString:@"esche.piante.carciofi"]);
+        XCTAssertTrue(suggestions.count == 3);
+        XCTAssertTrue([first_match.words isEqualToString:@"esche.piante.carciofi"]);
+        }
 
       [expectation fulfill];
       }];

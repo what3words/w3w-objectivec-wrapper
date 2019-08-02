@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		012C8749221AF18B00F0330B /* W3wGeocoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 012C8747221AF18B00F0330B /* W3wGeocoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		012C874A221AF18B00F0330B /* W3wGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 012C8748221AF18B00F0330B /* W3wGeocoder.m */; };
-		012C874B221AF18B00F0330B /* W3wGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 012C8748221AF18B00F0330B /* W3wGeocoder.m */; };
 		012C874D221B0D7100F0330B /* ObjCWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 012C874C221B0D7100F0330B /* ObjCWrapperTests.m */; };
 		01AFD90422329DD6002BD237 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01AFD90322329DD6002BD237 /* main.m */; };
 		01AFD90822329E01002BD237 /* W3wGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 012C8748221AF18B00F0330B /* W3wGeocoder.m */; };
@@ -236,6 +235,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 5B4A280E1E754E6E00260099;
@@ -290,7 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				012C874D221B0D7100F0330B /* ObjCWrapperTests.m in Sources */,
-				012C874B221AF18B00F0330B /* W3wGeocoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

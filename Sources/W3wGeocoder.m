@@ -7,7 +7,11 @@
 //
 
 #import "W3wGeocoder.h"
+#import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE
+    @import UIKit;
+#endif
 
 
 @implementation W3wGeocoder
@@ -23,6 +27,7 @@
     {
     apiUrl = API_URL;
     apiKey = key;
+    [self figureOutVersions];
     }
 
   return self;
@@ -212,7 +217,9 @@
   // make the call
   if (urlComponents.URL != NULL)
     {
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:urlComponents.URL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlComponents.URL];
+    [request setValue:versionHeader forHTTPHeaderField:@"X-W3W-Wrapper"];
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
       {
       NSDictionary *json     = NULL;
       
@@ -242,6 +249,31 @@
     }
 
   }
+
+
+
+
+
+// Establish the various version numbers in order to set an HTTP header for the URL session
+-(void)figureOutVersions
+  {
+  #if TARGET_OS_IPHONE
+    NSString *os_name = [[UIDevice currentDevice] systemName];
+  #else
+    NSString *os_name = @"Mac";
+  #endif
+  
+  NSOperatingSystemVersion os_version   = [[NSProcessInfo processInfo] operatingSystemVersion];
+  int                      objc_version = OBJC_API_VERSION;
+  //NSString                 *api_version = [NSBundle bundleForClass:[W3wGeocoder class]].infoDictionary[@"CFBundleShortVersionString"];
+  NSBundle *bundle = [NSBundle bundleForClass:[W3wGeocoder class]];
+  NSDictionary *dictionary = bundle.infoDictionary;
+  NSString *api_version = dictionary[@"CFBundleShortVersionString"];
+
+  versionHeader = [NSString stringWithFormat:@"what3words-ObjC/%@ (ObjC %d; %@ %ld.%ld.%ld)", api_version, objc_version, os_name, (long)os_version.majorVersion, (long)os_version.minorVersion, (long)os_version.patchVersion];
+  }
+
+
 
 
 
