@@ -89,6 +89,7 @@ enum InputType { VOCONHYBRID, NMDPASR };
   NSString *apiUrl;
   NSString *apiKey;
   NSString *versionHeader;
+  NSString *bundleHeader;
 }
 
 -(id)initWithApiKey:(NSString *)key;

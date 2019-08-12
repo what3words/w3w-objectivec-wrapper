@@ -219,6 +219,7 @@
     {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:urlComponents.URL];
     [request setValue:versionHeader forHTTPHeaderField:@"X-W3W-Wrapper"];
+    [request setValue:bundleHeader forHTTPHeaderField:@"X-Ios-Bundle-Identifier"];
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
       {
       NSDictionary *json     = NULL;
@@ -271,6 +272,7 @@
   NSString *api_version = dictionary[@"CFBundleShortVersionString"];
 
   versionHeader = [NSString stringWithFormat:@"what3words-ObjC/%@ (ObjC %d; %@ %ld.%ld.%ld)", api_version, objc_version, os_name, (long)os_version.majorVersion, (long)os_version.minorVersion, (long)os_version.patchVersion];
+  bundleHeader  = [[NSBundle mainBundle] bundleIdentifier];
   }
 
 
