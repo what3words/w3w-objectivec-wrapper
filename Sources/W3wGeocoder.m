@@ -294,6 +294,8 @@
   {
   if (input_type == VOCONHYBRID)
     return @"vocon-hybrid";
+  else if (input_type == GENERIC_VOICE)
+    return @"generic-voice";
   else
     return @"nmdp-asr";
   }
@@ -313,6 +315,7 @@
 +(AutoSuggestOption *)inputType:(enum InputType)input_type          { return [[AutoSuggestOption alloc] initAsInputType:input_type]; }
 +(AutoSuggestOption *)clipToCountry:(NSString *)country             { return [[AutoSuggestOption alloc] initAsClipToCountry:country]; }
 +(AutoSuggestOption *)clipToPolygon:(NSArray *)polygon              { return [[AutoSuggestOption alloc] initAsClipToPolygon:polygon]; }
++(AutoSuggestOption *)preferLand:(BOOL)land                         { return [[AutoSuggestOption alloc] initAsPreferLand:land]; }
 
 +(AutoSuggestOption *)clipToCircle:(CLLocationCoordinate2D)centre radius:(double)kilometers { return [[AutoSuggestOption alloc] initAsClipToCircle:centre radius:kilometers]; }
 
@@ -410,19 +413,35 @@
 
 
 -(id)initAsClipToPolygon:(NSArray *)polygon
+{
+    if (self = [super init])
+    {
+        key   = @"clip-to-polygon";
+        value = @"";
+        
+        for (CLLocation *coord in polygon)
+            value = [value stringByAppendingFormat:@"%f,%f,", coord.coordinate.latitude, coord.coordinate.longitude];
+    }
+    
+    // remove last comma if there was anything added to the string
+    if (![value isEqualToString:@""])
+        value = [value substringToIndex:[value length]-1];
+    
+    return self;
+}
+
+
+-(id)initAsPreferLand:(BOOL)land
   {
   if (self = [super init])
     {
-    key   = @"clip-to-polygon";
-    value = @"";
-    
-    for (CLLocation *coord in polygon)
-      value = [value stringByAppendingFormat:@"%f,%f,", coord.coordinate.latitude, coord.coordinate.longitude];
+    key   = @"prefer-land";
+      
+    if (land)
+      value = @"true";
+    else
+      value = @"false";
     }
-  
-  // remove last comma if there was anything added to the string
-  if (![value isEqualToString:@""])
-    value = [value substringToIndex:[value length]-1];
   
   return self;
   }

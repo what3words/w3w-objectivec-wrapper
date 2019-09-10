@@ -20,7 +20,7 @@
 
 - (void)setUp {
 
-    api = [[W3wGeocoder alloc] initWithApiKey:@"<Your Secret Key>"];
+  api = [[W3wGeocoder alloc] initWithApiKey:@"<Your Secret Key>"];
 }
 
 - (void)tearDown {
@@ -167,6 +167,7 @@
     NSArray *parameters = @[
       [AutoSuggestOption inputType:VOCONHYBRID],
       [AutoSuggestOption numberResults:3],
+      [AutoSuggestOption fallBackLanguage:@"en"],
       [AutoSuggestOption focus:CLLocationCoordinate2DMake(51.4243877, -0.3474524)]
       ];
 
@@ -177,7 +178,7 @@
       if (suggestions.count > 0)
         {
         W3wSuggestion *first_match = suggestions[0];
-        NSString *expected_result = @"tend.artichokes.poached";
+        NSString *expected_result = @"tend.artichokes.perch";
 
         XCTAssertTrue([first_match.words isEqualToString:expected_result]);
         }
@@ -189,6 +190,33 @@
 
     [self waitForExpectationsWithTimeout:3.0 handler:nil];
     }
+
+
+
+-(void)testAutoSuggestGenericVoice {
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Auto Suggest"];
+
+  [api autosuggest:@"filled count soap" parameters:@[ [AutoSuggestOption inputType:GENERIC_VOICE], [AutoSuggestOption fallBackLanguage:@"en"] ] completion:^(NSArray *suggestions, W3wError *error)
+   {
+     XCTAssertNil(error);
+     
+     if (suggestions.count > 0)
+     {
+       W3wSuggestion *first_match = suggestions[0];
+       NSString *expected_result = @"filled.count.soap";
+       
+       XCTAssertTrue([first_match.words isEqualToString:expected_result]);
+     }
+     
+     XCTAssertTrue(suggestions.count == 3);
+     
+     [expectation fulfill];
+   }];
+  
+  [self waitForExpectationsWithTimeout:3.0 handler:nil];
+}
+
+
 
 
 
@@ -214,6 +242,32 @@
 
     [self waitForExpectationsWithTimeout:3.0 handler:nil];
     }
+
+
+-(void)testAutoSuggestPreferLand {
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Auto Suggest"];
+  
+  [api autosuggest:@"bisect.nourishment.genuineness" parameter:[AutoSuggestOption preferLand:false] completion:^(NSArray *suggestions, W3wError *error)
+   {
+     XCTAssertNil(error);
+     
+     if (suggestions.count > 2)
+     {
+       W3wSuggestion *first_match = suggestions[0];
+       NSString *expected_result = @"ZZ";
+       
+       XCTAssertTrue([first_match.country isEqualToString:expected_result]);
+     }
+     
+     XCTAssertTrue(suggestions.count == 3);
+     
+     [expectation fulfill];
+   }];
+  
+  [self waitForExpectationsWithTimeout:3.0 handler:nil];
+}
+
+
 
 
 -(void)testAutoSuggestPolygon {

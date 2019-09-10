@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define API_URL @"https://api.what3words.com/v3/"
 
 enum Format { JSON, GEOJSON };
-enum InputType { VOCONHYBRID, NMDPASR };
+enum InputType { VOCONHYBRID, NMDPASR, GENERIC_VOICE };
 
 
 @interface W3wError : NSObject { }
@@ -72,6 +72,7 @@ enum InputType { VOCONHYBRID, NMDPASR };
 +(AutoSuggestOption *)clipToCircle:(CLLocationCoordinate2D)centre radius:(double)kilometers;
 +(AutoSuggestOption *)clipToBoundingBox:(float)south_lat west_lng:(float)west_lng north_lat:(float)north_lat east_lng:(float)east_lng;
 +(AutoSuggestOption *)clipToPolygon:(NSArray *)polygon;
++(AutoSuggestOption *)preferLand:(BOOL)land;
 
 -(id)initAsFallbackLanguage:(NSString *)language;
 -(id)initAsNumberResults:(int)number_results;
