@@ -82,6 +82,7 @@ enum InputType { VOCONHYBRID, NMDPASR, GENERIC_VOICE };
 -(id)initAsClipToCountry:(NSString *)country;
 -(id)initAsClipToCircle:(CLLocationCoordinate2D)centre radius:(double)kilometers;
 -(id)initAsClipToPolygon:(NSArray *)polygon;
+-(id)initAsBoundingBox:(float)south_lat west_lng:(float)west_lng north_lat:(float)north_lat east_lng:(float)east_lng;
 
 @end
 
